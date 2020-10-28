@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 *.pyc
 *.pyo
 
@@ -22,3 +23,8 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+=======
+venv/
+.vscode/
+__pycache__/
+>>>>>>> fe7a4234b49c93973ea863302da477d9ee06b201
