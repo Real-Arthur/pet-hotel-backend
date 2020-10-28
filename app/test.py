@@ -1,6 +1,6 @@
 from app import app
 import psycopg2
-conn = psycopg2.connect(user='cooper', host='127.0.0.1',  port=5432, dbname='pet_hotel')
+conn = psycopg2.connect(user='rthrcrsn', host='localhost', dbname='pet_hotel')
 cur = conn.cursor()
 
 @app.route('/hello')
