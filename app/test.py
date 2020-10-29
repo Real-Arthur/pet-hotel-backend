@@ -18,5 +18,4 @@ def customers():
     cur.execute("SELECT * FROM pets")
     pets = cur.fetchall()
     print(pets)
-    for pet in pets:
-        return jsonify(pet)
+    return jsonify(pets)
