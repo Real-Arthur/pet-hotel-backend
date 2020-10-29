@@ -1,6 +1,9 @@
 from app import app
+from flask_cors import CORS
+from flask import jsonify
+CORS(app)
 import psycopg2
-conn = psycopg2.connect(user='rthrcrsn', host='localhost', dbname='pet_hotel')
+conn = psycopg2.connect(user='rthrcrsn', host='localhost',  port=5432, dbname='pet_hotel')
 cur = conn.cursor()
 
 @app.route('/hello')
@@ -15,5 +18,4 @@ def customers():
     cur.execute("SELECT * FROM pets")
     pets = cur.fetchall()
     print(pets)
-    for pet in pets:
-        return pet
+    return jsonify(pets)
