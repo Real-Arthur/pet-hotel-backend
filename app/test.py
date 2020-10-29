@@ -19,3 +19,14 @@ def customers():
     pets = cur.fetchall()
     print(pets)
     return jsonify(pets)
+
+@app.route('/add', methods=['POST'])
+def addPets():
+    cur.execute("INSERT INTO pets (owner_id, name, breed, color, is_checked_in) VALUES (%s, %s, %s, %s, %s)", (1, 'Charlie', 'Shih-tzu', 'Black', True))
+    conn.commit()
+    cur.execute("SELECT * FROM pets")
+    pets = cur.fetchall()
+    return jsonify(pets)
+
+
+
