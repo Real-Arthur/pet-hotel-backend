@@ -22,7 +22,7 @@ def pets():
 
 @app.route('/pets/<id>', methods=['DELETE'])
 def petsdelete(id):
-    cur.execute(f"DELETE FROM pets WHERE id={id}")
+    cur.execute(f"DELETE FROM pets WHERE id=?")
     conn.commit()
     cur.execute("SELECT * FROM pets")
     pets = cur.fetchall()
@@ -35,6 +35,14 @@ def owners():
     pets = cur.fetchall()
     print(pets)
     return jsonify(pets)
+
+@app.route('/addOwners', methods=['POST'])
+def addOwners():
+    cur.execute("INSERT INTO owners (first_name, last_name) VALUES (%s, %s)", ('Jane', 'Doe'))
+    conn.commit()
+    cur.execute("SELECT * FROM owners")
+    owners = cur.fetchall()
+    return jsonify(owners)
 
 @app.route('/add', methods=['POST'])
 def addPets():
