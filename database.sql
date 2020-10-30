@@ -11,6 +11,12 @@ CREATE TABLE "pets" (
 	"color" VARCHAR(100), 
 	"is_checked_in" BOOLEAN
 	);
+	
+CREATE TABLE "junction" (
+	"id" SERIAL PRIMARY KEY,
+	"pet_id" INT REFERENCES "pets",
+	"owner_id" INT REFERENCES "owners"
+);
 
 INSERT INTO "owners" ("first_name", "last_name")
 VALUES ('Arthur', 'Carson');
