@@ -22,7 +22,7 @@ def pets():
 
 @app.route('/pets/<id>', methods=['DELETE'])
 def petsdelete(id):
-    cur.execute(f"DELETE FROM pets WHERE id=?")
+    cur.execute(f"DELETE FROM pets WHERE id={id}")
     conn.commit()
     cur.execute("SELECT * FROM pets")
     pets = cur.fetchall()
