@@ -3,7 +3,7 @@ from flask_cors import CORS
 from flask import jsonify, json, g, request
 CORS(app)
 import psycopg2
-conn = psycopg2.connect(user='rthrcrsn', host='localhost', dbname='pet_hotel')
+conn = psycopg2.connect(user='cooper', host='localhost', dbname='pet_hotel')
 cur = conn.cursor()
 
 @app.route('/hello')
@@ -37,9 +37,18 @@ def owners():
     return jsonify(pets)
 
 @app.route('/add', methods=['POST'])
-def addPets():
-    cur.execute("INSERT INTO pets (owner_id, name, breed, color, is_checked_in) VALUES (%s, %s, %s, %s, %s)", (1, 'Charlie', 'Shih-tzu', 'Black', True))
+def addPets(owner_id, name, breed, color, is_checked_in):
+    # content = request.json
+    # cur.execute(f"INSERT INTO pets (owner_id, name, breed, color, is_checked_in) VALUES ({owner_id}, {name}, {breed}, {color}, {is_checked_in}');")
+    # cur.execute(sql, (content["owner_id"], content["name"], content["breed"], content["color"], content["is_checked_in"]))
     conn.commit()
     cur.execute("SELECT * FROM pets")
     pets = cur.fetchall()
     return jsonify(pets)
+@app.after_request
+def after_request(response):
+  response.headers.add('Access-Control-Allow-Origin', 'http://127.0.0.1:5000/')
+  response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
+  response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS')
+  response.headers.add('Access-Control-Allow-Credentials', 'true')
+  return response
